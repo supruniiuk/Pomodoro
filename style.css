@@ -21,10 +21,12 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  font-family: system-ui;
 }
 .header {
   text-align: center;
   margin-bottom: 50px;
+  font-size: 25px;
 }
 .main {
   width: 35%;
@@ -41,22 +43,112 @@ body {
 }
 
 .clock {
-  height: 600px;
+  height: 500px;
   display: grid;
   place-items: center;
 }
 
 .circle {
-  height: 400px;
-  width: 400px;
+  height: 450px;
+  width: 450px;
   border-radius: 50%;
   background-color: #161932;
-  border: 20px solid white;
 
   display: grid;
   place-items: center;
 }
 
+.timeline {
+  height: 350px;
+  width: 350px;
+  border-radius: 50%;
+  background-color: coral;
+
+  display: grid;
+  place-items: center;
+  position: relative;
+  font-weight: bold;
+  animation: line 3s linear forwards;
+}
+
 .time {
-  font-size: 50px;
+  font-size: 90px;
+}
+.option {
+  position: absolute;
+  top: 70%;
+  left: 0;
+  text-align: center;
+  width: 100%;
+  font-size: 30px;
+  letter-spacing: 10px;
+}
+.circle__content {
+  background-color: yellow;
+  width: 310px;
+  height: 310px;
+  border-radius: 50%;
+  z-index: 5;
+}
+
+.timeline::before {
+  content: "";
+  width: 50%;
+  height: 100%;
+  left: 0;
+  background-color: brown;
+  position: absolute;
+  border-radius: 100% 0 0 100% / 50% 0 0 50%;
+  animation: mask_right 3s steps(1, end) forwards;
+}
+
+.timeline::after {
+  content: "";
+  width: 50%;
+  height: 100%;
+  right: 0;
+  position: absolute;
+  background-color: brown;
+  border-radius: 0 100% 100% 0 / 0 50% 50% 0;
+  animation: mask_left 3s steps(1, end) forwards;
+}
+
+.time-circle {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  position: absolute;
+  background-color: #161932;
+  z-index: 10;
+  display: grid;
+  place-items: center;
+}
+
+@keyframes line {
+  0% {
+    transform: rotate(var(--deg));
+  }
+  100% {
+    transform: rotate(-360deg);
+  }
+}
+
+@keyframes mask_left {
+  0% {
+    visibility: visible;
+  }
+  50%,
+  100% {
+    visibility: hidden;
+  }
+}
+
+@keyframes mask_right {
+  0% {
+    visibility: hidden;
+  }
+  50%,
+  100% {
+    visibility: visible;
+  }
 }

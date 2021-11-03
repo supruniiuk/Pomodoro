@@ -7,7 +7,9 @@
   </head>
   <body>
     <main class="main">
-      <div class="header"><h1 class="main__header">pomodoro</h1></div>
+      <div class="header">
+        <h1 class="main__header">pomodoro<span class="percent"></span></h1>
+      </div>
 
       <div class="pomodoro-time">
         <div class="pomodoro-time-type">
@@ -23,11 +25,17 @@
 
       <div class="clock">
         <div class="circle">
-          <h1 class="time">
-            <span id="min">min</span>
-            :
-            <span id="sec">sec</span>
-          </h1>
+          <div class="timeline">
+            <div class="circle__content"></div>
+          </div>
+          <div class="time-circle">
+            <p class="time">
+              <span id="min">min</span>
+              :
+              <span id="sec">sec</span>
+            </p>
+            <p class="option">start</p>
+          </div>
         </div>
       </div>
     </main>

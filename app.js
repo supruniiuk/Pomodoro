@@ -16,36 +16,50 @@ const pauseTimer = () => {
   clearInterval(intrvl);
 };
 
-const setTime = (time) => {
-  let [min, sec] = convert_from_seconds(time);
+const resetTimer = () => {
+  clearInterval(intrvl);
+  setTime(time);
+};
+
+const setTime = (currentTime) => {
+  let [min, sec] = convert_from_seconds(currentTime);
 
   minutes.textContent = String(min).padStart(2, "0");
   seconds.textContent = String(sec).padStart(2, "0");
 };
 
+const getPercent = (currentTime) => {
+  return (currentTime * 100) / time;
+};
 const showTime = () => {
-  if (time > 0) {
-    --time;
-    setTime(time);
+  if (currentTime > 0) {
+    --currentTime;
+    setPercent(currentTime);
+    setTime(currentTime);
   }
 };
 
 let time = 22;
+let currentTime = 22;
 let repeat_time = 1000;
 let counterActive = false;
+let timePercent = 100;
 let intrvl;
 
 let minutes = document.querySelector("#min");
 let seconds = document.querySelector("#sec");
+let optionText = document.getElementsByClassName("option")[0];
 
 let timer = document.querySelector(".circle");
 timer.onclick = () => {
   if (!counterActive) {
     startTimer();
     counterActive = true;
+    optionText.textContent = "pause";
   } else {
     pauseTimer();
     counterActive = false;
+    optionText.textContent = "start";
   }
 };
 
