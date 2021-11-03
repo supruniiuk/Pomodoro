@@ -1,14 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Pomodoro</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <h1>pomodoro</h1>
-    <div class=""></div>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="main">
+      <div class="header"><h1 class="main__header">pomodoro</h1></div>
+
+      <div class="pomodoro-time">
+        <div class="pomodoro-time-type">
+          <p>pomodoro</p>
+        </div>
+        <div class="pomodoro-time-type">
+          <p>short break</p>
+        </div>
+        <div class="pomodoro-time-type">
+          <p>long break</p>
+        </div>
+      </div>
+
+      <div class="clock">
+        <div class="circle">
+          <h1 class = 'time'>
+            <span id="min">min</span>
+            :
+            <span id="sec">sec</span>
+          </h1>
+        </div>
+      </div>
+    </main>
 
     <script src="./app.js"></script>
-</body>
+  </body>
 </html>
