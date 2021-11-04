@@ -57,6 +57,17 @@ timer.onclick = () => {
     startTimer();
     counterActive = true;
     optionText.textContent = "pause";
+
+    document.querySelector(".circle__content").style.animationPlayState =
+      "running";
+    document.querySelector(
+      ".circle__content::before"
+    ).style.animationPlayState = "running";
+    document.querySelector(".timeline::before").style.animationPlayState =
+      "running";
+    document.querySelector(".timeline::after").style.animationPlayState =
+      "running";
+
   } else {
     pauseTimer();
     counterActive = false;
@@ -65,3 +76,12 @@ timer.onclick = () => {
 };
 
 setTime(time);
+
+/*
+    document.querySelector(".timer-line").style.animationPlayState = "paused";
+    document.querySelector(".timer-line::after").style.animationPlayState =
+      "paused";
+    document.querySelector(".timer:before").style.animationPlayState = "paused";
+    document.querySelector(".timer:after").style.animationPlayState = "paused";*/
+
+
