@@ -58,6 +58,13 @@ body {
   place-items: center;
 }
 
+
+
+
+
+
+
+
 .timeline {
   height: 350px;
   width: 350px;
@@ -68,7 +75,6 @@ body {
   place-items: center;
   position: relative;
   font-weight: bold;
-  animation: line 3s linear forwards;
 }
 
 .time {
@@ -84,33 +90,48 @@ body {
   letter-spacing: 10px;
 }
 .circle__content {
-  background-color: yellow;
-  width: 310px;
-  height: 310px;
+  height: 350px;
+  width: 350px;
   border-radius: 50%;
   z-index: 5;
+  animation: line 6s linear forwards;
 }
 
-.timeline::before {
+.circle__content::before {
+  background-color: green;
+
   content: "";
   width: 50%;
   height: 100%;
   left: 0;
-  background-color: brown;
   position: absolute;
   border-radius: 100% 0 0 100% / 50% 0 0 50%;
-  animation: mask_right 3s steps(1, end) forwards;
+  animation: mask_right 6s;
+}
+
+.timeline::before {
+  background-color: coral;
+  z-index: 10;
+  content: "";
+  width: 50%;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  animation: mask_right 6s steps(1, end) forwards;
+
+  border-radius: 100% 0 0 100% / 50% 0 0 50%;
 }
 
 .timeline::after {
+  background-color: green;
+
   content: "";
   width: 50%;
   height: 100%;
   right: 0;
   position: absolute;
-  background-color: brown;
   border-radius: 0 100% 100% 0 / 0 50% 50% 0;
-  animation: mask_left 3s steps(1, end) forwards;
+  animation: mask_left 6s steps(1, end) forwards;
 }
 
 .time-circle {

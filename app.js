@@ -34,8 +34,9 @@ const getPercent = (currentTime) => {
 const showTime = () => {
   if (currentTime > 0) {
     --currentTime;
-    setPercent(currentTime);
     setTime(currentTime);
+
+    setPercent(currentTime);
   }
 };
 
