@@ -54,8 +54,9 @@ body {
   border-radius: 50%;
   background-color: #161932;
 
-  display: grid;
+  display: flex;
   place-items: center;
+  justify-content: center;
 }
 
 .timeline {
@@ -64,10 +65,10 @@ body {
   border-radius: 50%;
   background-color: #1e2140;
 
-  display: grid;
-  place-items: center;
   position: relative;
   font-weight: bold;
+  display: grid;
+  place-items: center;
 }
 
 .time {
@@ -87,7 +88,7 @@ body {
   width: 350px;
   border-radius: 50%;
   z-index: 5;
-  animation: line 6s linear forwards;
+  /*animation: line 10s linear forwards;*/
 }
 
 .circle__content::before {
@@ -99,7 +100,6 @@ body {
   left: 0;
   position: absolute;
   border-radius: 100% 0 0 100% / 50% 0 0 50%;
-  animation: mask_right 6s;
 }
 
 .timeline::before {
@@ -110,9 +110,10 @@ body {
   height: 100%;
   left: 0;
   position: absolute;
-  animation: mask_right 6s steps(1, end) forwards;
-
+  animation: var(--animBefore);
+  /* animation: mask_right 10s steps(1, end) forwards;*/
   border-radius: 100% 0 0 100% / 50% 0 0 50%;
+  visibility: hidden;
 }
 
 .timeline::after {
@@ -124,7 +125,9 @@ body {
   right: 0;
   position: absolute;
   border-radius: 0 100% 100% 0 / 0 50% 50% 0;
-  animation: mask_left 6s steps(1, end) forwards;
+  animation: var(--animAfter);
+
+  /* animation: mask_left 10s steps(1, end) forwards;*/
 }
 
 .time-circle {

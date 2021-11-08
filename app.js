@@ -35,13 +35,20 @@ const showTime = () => {
   if (currentTime > 0) {
     --currentTime;
     setTime(currentTime);
-
-    setPercent(currentTime);
   }
 };
 
-let time = 22;
-let currentTime = 22;
+const setAnimation = () => {
+  document.querySelector(".circle__content").style.animation =
+    "line 10s linear forwards";
+
+  let timelineStyle = document.querySelector(".timeline").style;
+  timelineStyle.setProperty("--animBefore", "mask_right 10s steps(1, end) forwards");
+  timelineStyle.setProperty("--animAfter", "mask_left 10s steps(1, end) forwards");
+};
+
+let time = 10;
+let currentTime = 10;
 let repeat_time = 1000;
 let counterActive = false;
 let timePercent = 100;
@@ -58,16 +65,7 @@ timer.onclick = () => {
     counterActive = true;
     optionText.textContent = "pause";
 
-    document.querySelector(".circle__content").style.animationPlayState =
-      "running";
-    document.querySelector(
-      ".circle__content::before"
-    ).style.animationPlayState = "running";
-    document.querySelector(".timeline::before").style.animationPlayState =
-      "running";
-    document.querySelector(".timeline::after").style.animationPlayState =
-      "running";
-
+    setAnimation();
   } else {
     pauseTimer();
     counterActive = false;
@@ -83,5 +81,3 @@ setTime(time);
       "paused";
     document.querySelector(".timer:before").style.animationPlayState = "paused";
     document.querySelector(".timer:after").style.animationPlayState = "paused";*/
-
-
