@@ -82,6 +82,8 @@ body {
   width: 100%;
   font-size: 30px;
   letter-spacing: 10px;
+
+  cursor: pointer;
 }
 .circle__content {
   height: 350px;
@@ -110,10 +112,11 @@ body {
   height: 100%;
   left: 0;
   position: absolute;
+  visibility: hidden;
   animation: var(--animBefore);
+  animation-play-state: var(--pauseBefore);
   /* animation: mask_right 10s steps(1, end) forwards;*/
   border-radius: 100% 0 0 100% / 50% 0 0 50%;
-  visibility: hidden;
 }
 
 .timeline::after {
@@ -126,7 +129,7 @@ body {
   position: absolute;
   border-radius: 0 100% 100% 0 / 0 50% 50% 0;
   animation: var(--animAfter);
-
+  animation-play-state: var(--pauseAfter);
   /* animation: mask_left 10s steps(1, end) forwards;*/
 }
 
@@ -156,7 +159,8 @@ body {
   }
   50%,
   100% {
-    visibility: hidden;
+    /*visibility: hidden;*/
+    background-color: #1e2140;
   }
 }
 

@@ -13,6 +13,15 @@ const startTimer = () => {
 };
 
 const pauseTimer = () => {
+  document.querySelector(
+    ".circle__content"
+  ).style.animationPlayState = `paused`;
+
+  let timelineStyle = document.querySelector(".timeline").style;
+  timelineStyle.setProperty("--pauseBefore", `paused`);
+  timelineStyle.setProperty("--pauseAfter", `paused`);
+
+  console.log(getPercent(currentTime), currentTime);
   clearInterval(intrvl);
 };
 
@@ -33,22 +42,44 @@ const getPercent = (currentTime) => {
 };
 const showTime = () => {
   if (currentTime > 0) {
-    --currentTime;
-    setTime(currentTime);
+    setTime(--currentTime);
+  } else if (currentTime == 0) {
+    optionText.textContent = "start";
   }
 };
 
-const setAnimation = () => {
-  document.querySelector(".circle__content").style.animation =
-    "line 10s linear forwards";
+const setAnimation = (time) => {
+  let animation = window.getComputedStyle(
+    document.querySelector(".circle__content"),
+    null
+  )["animation-play-state"];
+  if (animation == "paused") {
+    document.querySelector(
+      ".circle__content"
+    ).style.animationPlayState = `running`;
 
-  let timelineStyle = document.querySelector(".timeline").style;
-  timelineStyle.setProperty("--animBefore", "mask_right 10s steps(1, end) forwards");
-  timelineStyle.setProperty("--animAfter", "mask_left 10s steps(1, end) forwards");
+    let timelineStyle = document.querySelector(".timeline").style;
+    timelineStyle.setProperty("--pauseBefore", `running`);
+    timelineStyle.setProperty("--pauseAfter", `running`);
+  } else {
+    document.querySelector(
+      ".circle__content"
+    ).style.animation = `line ${time}s linear forwards`;
+
+    let timelineStyle = document.querySelector(".timeline").style;
+    timelineStyle.setProperty(
+      "--animBefore",
+      `mask_right ${time}s steps(1, end) forwards`
+    );
+    timelineStyle.setProperty(
+      "--animAfter",
+      `mask_left ${time}s steps(1, end) forwards`
+    );
+  }
 };
 
-let time = 10;
-let currentTime = 10;
+let time = 15;
+let currentTime = 15;
 let repeat_time = 1000;
 let counterActive = false;
 let timePercent = 100;
@@ -59,25 +90,29 @@ let seconds = document.querySelector("#sec");
 let optionText = document.getElementsByClassName("option")[0];
 
 let timer = document.querySelector(".circle");
-timer.onclick = () => {
+
+function click() {
   if (!counterActive) {
+    setAnimation(time);
     startTimer();
     counterActive = true;
     optionText.textContent = "pause";
-
-    setAnimation();
   } else {
     pauseTimer();
     counterActive = false;
     optionText.textContent = "start";
   }
+}
+
+window.onkeypress = () => {
+  click();
+};
+timer.onclick = () => {
+  click();
 };
 
 setTime(time);
 
 /*
-    document.querySelector(".timer-line").style.animationPlayState = "paused";
-    document.querySelector(".timer-line::after").style.animationPlayState =
-      "paused";
-    document.querySelector(".timer:before").style.animationPlayState = "paused";
-    document.querySelector(".timer:after").style.animationPlayState = "paused";*/
+time - 
+*/
