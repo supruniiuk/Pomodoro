@@ -12,16 +12,33 @@ const startTimer = () => {
   intrvl = setInterval(showTime, repeat_time);
 };
 
-const pauseTimer = () => {
-  document.querySelector(
-    ".circle__content"
-  ).style.animationPlayState = `paused`;
-
+const setAnimationPlay = () => {
   let timelineStyle = document.querySelector(".timeline").style;
-  timelineStyle.setProperty("--pauseBefore", `paused`);
-  timelineStyle.setProperty("--pauseAfter", `paused`);
+  let animation = window.getComputedStyle(
+    document.querySelector(".circle__content"),
+    null
+  )["animation-play-state"];
+  if (animation == "paused") {
+    document.querySelector(
+      ".circle__content"
+    ).style.animationPlayState = `running`;
 
-  console.log(getPercent(currentTime), currentTime);
+    timelineStyle.setProperty("--pauseBefore", `running`);
+    timelineStyle.setProperty("--pauseAfter", `running`);
+  } else if (animation == "running") {
+    document.querySelector(
+      ".circle__content"
+    ).style.animationPlayState = `paused`;
+
+    timelineStyle.setProperty("--pauseBefore", `paused`);
+    timelineStyle.setProperty("--pauseAfter", `paused`);
+  }
+};
+
+const pauseTimer = () => {
+  showTime();
+  setAnimationPlay();
+
   clearInterval(intrvl);
 };
 
@@ -49,18 +66,8 @@ const showTime = () => {
 };
 
 const setAnimation = (time) => {
-  let animation = window.getComputedStyle(
-    document.querySelector(".circle__content"),
-    null
-  )["animation-play-state"];
-  if (animation == "paused") {
-    document.querySelector(
-      ".circle__content"
-    ).style.animationPlayState = `running`;
-
-    let timelineStyle = document.querySelector(".timeline").style;
-    timelineStyle.setProperty("--pauseBefore", `running`);
-    timelineStyle.setProperty("--pauseAfter", `running`);
+  if (time != currentTime) {
+    setAnimationPlay();
   } else {
     document.querySelector(
       ".circle__content"
@@ -78,8 +85,8 @@ const setAnimation = (time) => {
   }
 };
 
-let time = 15;
-let currentTime = 15;
+let time = 1500;
+let currentTime = 1500;
 let repeat_time = 1000;
 let counterActive = false;
 let timePercent = 100;
@@ -107,12 +114,17 @@ function click() {
 window.onkeypress = () => {
   click();
 };
+
 timer.onclick = () => {
   click();
 };
 
-setTime(time);
+window.onkeydown = () => {
+  document.querySelector(".circle").classList.add("active");
+};
 
-/*
-time - 
-*/
+window.onkeyup = () => {
+  document.querySelector(".circle").classList.remove("active");
+};
+
+setTime(time);

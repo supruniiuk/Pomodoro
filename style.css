@@ -57,6 +57,18 @@ body {
   display: flex;
   place-items: center;
   justify-content: center;
+
+  box-shadow: inset -20px 20px 20px rgba(0, 0, 0, 0.1),
+    -20px 20px 30px rgba(0, 0, 0, 0.3);
+
+  transition: all 1s ease-out;
+}
+
+.active,
+.circle:active {
+  box-shadow: inset -20px 20px 20px rgba(0, 0, 0, 0.1),
+    -10px 10px 10px rgba(0, 0, 0, 0.3);
+  transform: scale(0.97);
 }
 
 .timeline {
@@ -69,6 +81,8 @@ body {
   font-weight: bold;
   display: grid;
   place-items: center;
+
+  box-shadow: inset -3px 3px 6px rgba(0, 0, 0, 0.3);
 }
 
 .time {
