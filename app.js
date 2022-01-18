@@ -92,11 +92,11 @@ let counterActive = false;
 let timePercent = 100;
 let intrvl;
 
-let minutes = document.querySelector("#min");
-let seconds = document.querySelector("#sec");
-let optionText = document.getElementsByClassName("option")[0];
+const  minutes = document.querySelector("#min");
+const seconds = document.querySelector("#sec");
+const optionText = document.getElementsByClassName("option")[0];
 
-let timer = document.querySelector(".circle");
+const timer = document.querySelector(".circle");
 
 function click() {
   if (!counterActive) {
