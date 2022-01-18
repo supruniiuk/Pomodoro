@@ -37,6 +37,8 @@ body {
   width: 35%;
 }
 
+/*  TIME TIPES */
+
 .pomodoro-time {
   justify-content: space-evenly;
   background-color: #161932;
@@ -59,6 +61,13 @@ body {
   box-shadow: 0px 0px 30px 10px rgba(0, 0, 0, 0.3);
   border-radius: 10px;
 }
+
+.pomodoro-time-type:active {
+  box-shadow: 0px 0px 50px 10px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+}
+
+/* TIMER */
 
 .clock {
   height: 500px;
@@ -177,6 +186,8 @@ body {
 .clock {
   cursor: pointer;
 }
+
+/* ANIMATION */
 
 @keyframes line {
   0% {

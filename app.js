@@ -57,6 +57,7 @@ const setTime = (currentTime) => {
 const getPercent = (currentTime) => {
   return (currentTime * 100) / time;
 };
+
 const showTime = () => {
   if (currentTime > 0) {
     setTime(--currentTime);
@@ -87,19 +88,36 @@ const setAnimation = (time) => {
 
 let time = 1500;
 let currentTime = 1500;
-let repeat_time = 1000;
+const repeat_time = 1000;
 let counterActive = false;
 let timePercent = 100;
+const timeTypes = {
+  pomodoro: 1500,
+  shortBreak: 300,
+  longBreak: 600,
+};
 let intrvl;
 
-const  minutes = document.querySelector("#min");
+const minutes = document.querySelector("#min");
 const seconds = document.querySelector("#sec");
 const optionText = document.getElementsByClassName("option")[0];
+const timePicker = document.getElementsByClassName("pomodoro-time-type");
 
 const timer = document.querySelector(".circle");
 
+for (let i = 0; i < timePicker.length; i++) {
+  let duration = timeTypes[timePicker[i].getAttribute("data-time-type")];
+  timePicker[i].onclick = () => {
+    setTime(time);
+    time = duration;
+    currentTime = duration;
+  };
+  console.log(timePicker[i]);
+}
+
 function click() {
   if (!counterActive) {
+    console.log("time", time);
     setAnimation(time);
     startTimer();
     counterActive = true;
@@ -111,11 +129,11 @@ function click() {
   }
 }
 
-window.onkeypress = () => {
+timer.onclick = () => {
   click();
 };
 
-timer.onclick = () => {
+window.onkeypress = () => {
   click();
 };
 
