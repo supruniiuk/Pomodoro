@@ -5,41 +5,45 @@
     <title>Pomodoro</title>
     <link rel="stylesheet" href="style.css" />
   </head>
-  <body class="flex">
-    <main class="main">
-      <div class="header">
-        <h1 class="main__header">pomodoro<span class="percent"></span></h1>
-      </div>
+  <body>
+    <header class="flex">
+      <h1 class="main__header">pomodoro<span class="percent"></span></h1>
+    </header>
 
-      <div class="pomodoro-time flex">
-        <div data-time-type="pomodoro" class="pomodoro-time-type flex">
+    <main class="main">
+      <div class="pomodoro-time block-frame flex">
+        <div data-time-type="pomodoro" class="btn flex">
           <p>pomodoro</p>
         </div>
-        <div data-time-type="shortBreak" class="pomodoro-time-type flex">
+        <div data-time-type="shortBreak" class="btn flex">
           <p>short break</p>
         </div>
-        <div data-time-type="longBreak" class="pomodoro-time-type flex">
+        <div data-time-type="longBreak" class="btn flex">
           <p>long break</p>
         </div>
       </div>
 
-      <div class="clock">
-        <div class="circle flex">
-          <div class="timeline">
-            <div class="circle__content"></div>
+      <div class="flex clock block-frame">
+        <div class="flex">
+          <p class="time">
+            <span id="min">25</span>
+            :
+            <span id="sec">00</span>
+          </p>
+        </div>
+
+        <div class="control-btns block-frame flex">
+          <div data-action="start" class="btn flex">
+            <p>start</p>
           </div>
-          <div class="time-circle">
-            <p class="time">
-              <span id="min">min</span>
-              :
-              <span id="sec">sec</span>
-            </p>
-            <p class="option">start</p>
+          <div data-action="pause" class="btn flex">
+            <p>pause</p>
+          </div>
+          <div data-action="reset" class="btn flex">
+            <p>reset</p>
           </div>
         </div>
       </div>
     </main>
-
-    <script src="./app.js"></script>
   </body>
 </html>

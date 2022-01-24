@@ -43,8 +43,7 @@ const pauseTimer = () => {
 };
 
 const resetTimer = () => {
-  clearInterval(intrvl);
-  setTime(time);
+  /*???*/
 };
 
 const setTime = (currentTime) => {
@@ -90,7 +89,6 @@ let time = 1500;
 let currentTime = 1500;
 const repeat_time = 1000;
 let counterActive = false;
-let timePercent = 100;
 const timeTypes = {
   pomodoro: 1500,
   shortBreak: 300,
@@ -108,16 +106,16 @@ const timer = document.querySelector(".circle");
 for (let i = 0; i < timePicker.length; i++) {
   let duration = timeTypes[timePicker[i].getAttribute("data-time-type")];
   timePicker[i].onclick = () => {
-    setTime(time);
+    showTime(time);
     time = duration;
     currentTime = duration;
+
+    resetTimer();
   };
-  console.log(timePicker[i]);
 }
 
 function click() {
   if (!counterActive) {
-    console.log("time", time);
     setAnimation(time);
     startTimer();
     counterActive = true;
