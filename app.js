@@ -8,83 +8,6 @@ const convert_from_seconds = (seconds) => {
   return [min, sec];
 };
 
-const startTimer = () => {
-  intrvl = setInterval(showTime, repeat_time);
-};
-
-const setAnimationPlay = () => {
-  let timelineStyle = document.querySelector(".timeline").style;
-  let animation = window.getComputedStyle(
-    document.querySelector(".circle__content"),
-    null
-  )["animation-play-state"];
-  if (animation == "paused") {
-    document.querySelector(
-      ".circle__content"
-    ).style.animationPlayState = `running`;
-
-    timelineStyle.setProperty("--pauseBefore", `running`);
-    timelineStyle.setProperty("--pauseAfter", `running`);
-  } else if (animation == "running") {
-    document.querySelector(
-      ".circle__content"
-    ).style.animationPlayState = `paused`;
-
-    timelineStyle.setProperty("--pauseBefore", `paused`);
-    timelineStyle.setProperty("--pauseAfter", `paused`);
-  }
-};
-
-const pauseTimer = () => {
-  showTime();
-  setAnimationPlay();
-
-  clearInterval(intrvl);
-};
-
-const resetTimer = () => {
-  /*???*/
-};
-
-const setTime = (currentTime) => {
-  let [min, sec] = convert_from_seconds(currentTime);
-
-  minutes.textContent = String(min).padStart(2, "0");
-  seconds.textContent = String(sec).padStart(2, "0");
-};
-
-const getPercent = (currentTime) => {
-  return (currentTime * 100) / time;
-};
-
-const showTime = () => {
-  if (currentTime > 0) {
-    setTime(--currentTime);
-  } else if (currentTime == 0) {
-    optionText.textContent = "start";
-  }
-};
-
-const setAnimation = (time) => {
-  if (time != currentTime) {
-    setAnimationPlay();
-  } else {
-    document.querySelector(
-      ".circle__content"
-    ).style.animation = `line ${time}s linear forwards`;
-
-    let timelineStyle = document.querySelector(".timeline").style;
-    timelineStyle.setProperty(
-      "--animBefore",
-      `mask_right ${time}s steps(1, end) forwards`
-    );
-    timelineStyle.setProperty(
-      "--animAfter",
-      `mask_left ${time}s steps(1, end) forwards`
-    );
-  }
-};
-
 let time = 1500;
 let currentTime = 1500;
 const repeat_time = 1000;
@@ -98,49 +21,59 @@ let intrvl;
 
 const minutes = document.querySelector("#min");
 const seconds = document.querySelector("#sec");
-const optionText = document.getElementsByClassName("option")[0];
-const timePicker = document.getElementsByClassName("pomodoro-time-type");
+const timePicker = document.querySelectorAll("[data-time-type]");
 
-const timer = document.querySelector(".circle");
+const startBtn = document.querySelector('[data-action="start"]');
+const pauseBtn = document.querySelector('[data-action="pause"]');
+const resetBtn = document.querySelector('[data-action="reset"]');
+
+const showTime = () => {
+  if (currentTime > 0) {
+    let [min, sec] = convert_from_seconds(currentTime--);
+
+    minutes.textContent = String(min).padStart(2, "0");
+    seconds.textContent = String(sec).padStart(2, "0");
+  }
+};
+
+const setTime = (duration) => {
+  time = duration;
+  currentTime = duration;
+};
+
+const startTimer = () => {
+  intrvl = setInterval(showTime, repeat_time);
+};
+
+const pauseTimer = () => {
+  clearInterval(intrvl);
+};
+
+const resetTimer = () => {
+  clearInterval(intrvl);
+  currentTime = time;
+  showTime();
+};
 
 for (let i = 0; i < timePicker.length; i++) {
-  let duration = timeTypes[timePicker[i].getAttribute("data-time-type")];
-  timePicker[i].onclick = () => {
-    showTime(time);
-    time = duration;
-    currentTime = duration;
+  const element = timePicker[i];
+  const duration = element.getAttribute("data-time-type");
+  console.log(duration, timeTypes[duration]);
 
-    resetTimer();
+  element.onclick = () => {
+    setTime(timeTypes[duration]);
+    showTime(timeTypes[duration]);
   };
 }
 
-function click() {
-  if (!counterActive) {
-    setAnimation(time);
-    startTimer();
-    counterActive = true;
-    optionText.textContent = "pause";
-  } else {
-    pauseTimer();
-    counterActive = false;
-    optionText.textContent = "start";
-  }
-}
-
-timer.onclick = () => {
-  click();
+startBtn.onclick = () => {
+  startTimer();
 };
 
-window.onkeypress = () => {
-  click();
+pauseBtn.onclick = () => {
+  pauseTimer();
 };
 
-window.onkeydown = () => {
-  document.querySelector(".circle").classList.add("active");
+resetBtn.onclick = () => {
+  resetTimer();
 };
-
-window.onkeyup = () => {
-  document.querySelector(".circle").classList.remove("active");
-};
-
-setTime(time);
