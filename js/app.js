@@ -26,8 +26,7 @@ const timeTypes = {
 };
 let intrvl;
 
-
-const showTime = () => {
+const showCurrentTime = () => {
   if (currentTime > 0) {
     let [min, sec] = convert_from_seconds(currentTime--);
 
@@ -41,21 +40,20 @@ const setTime = (duration) => {
   currentTime = duration;
 };
 
-
 const startTimer = () => {
-  intrvl = setInterval(showTime, repeat_time);
+  intrvl = setInterval(showCurrentTime, repeat_time);
 };
 
 const pauseTimer = () => {
   clearInterval(intrvl);
+  intrvl = null;
 };
 
 const resetTimer = () => {
-  clearInterval(intrvl);
+  pauseTimer();
   currentTime = time;
-  showTime();
+  showCurrentTime();
 };
-
 
 for (let i = 0; i < timePicker.length; i++) {
   const element = timePicker[i];
@@ -64,13 +62,14 @@ for (let i = 0; i < timePicker.length; i++) {
   element.onclick = () => {
     resetTimer();
     setTime(timeTypes[duration]);
-    showTime(timeTypes[duration]);
+    showCurrentTime(timeTypes[duration]);
   };
 }
 
-
 startBtn.onclick = () => {
-  startTimer();
+  if (!intrvl) {
+    startTimer();
+  }
 };
 
 pauseBtn.onclick = () => {
