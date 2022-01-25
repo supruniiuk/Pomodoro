@@ -18,6 +18,9 @@ body {
   overflow-x: hidden;
   background: var(--darkBlue);
   color: white;
+  background-image: url(./svg/tomatoes-tomato-svgrepo-com.svg);
+  background-size: 100px 100px;
+  background-repeat: space;
 }
 
 .flex {
@@ -31,7 +34,7 @@ body {
   border-radius: 10px;
   width: fit-content;
   margin: 0 auto;
-  box-shadow: -10px 10px 15px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 10px 25px 5px rgba(0, 0, 0, 0.3);
 }
 
 .btn {
@@ -44,7 +47,7 @@ body {
 }
 
 .btn:hover {
-  box-shadow: 0px 0px 30px 10px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 10px 30px 10px rgba(0, 0, 0, 0.3);
   border-radius: 10px;
 
   background-color: var(--darkRed);
