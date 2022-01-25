@@ -38,7 +38,9 @@ body {
   font-size: 20px;
   height: 100px;
   width: 150px;
+  padding: 15px;
   cursor: pointer;
+  text-align: center;
 }
 
 .btn:hover {
@@ -96,4 +98,36 @@ header {
 .control-btns > div {
   height: 50px;
   width: 33.3%;
+}
+
+@media screen and (max-width: 960px) {
+  .time {
+    font-size: 100px;
+  }
+}
+
+@media screen and (max-width: 760px) {
+  .btn {
+    width: 33.3%;
+  }
+
+  .clock,
+  .pomodoro-time {
+    width: 90%;
+    min-width: 90%;
+  }
+
+  .time {
+    font-size: 90px;
+  }
+
+  .btn p {
+    font-size: 20px;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .btn p {
+    font-size: 17px;
+  }
 }
